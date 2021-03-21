@@ -40,9 +40,18 @@ public class Reserva {
 		return TimeUnit.DAYS.convert(calc, TimeUnit.MILLISECONDS);
 	}
 	
-	public void dataAtualizada(Date chegada, Date saida) {
+	
+	public String dataAtualizada(Date chegada, Date saida) {
+		Date agora = new Date();
+		if(chegada.before(agora) || saida.before(agora)) {
+			return "Erro na reserva! as datas de reservas devem ser Datas Futuras";
+		} 
+		if(!saida.after(chegada)) {
+			return "Erro na reserva, por favor rever as DATAS!";
+		}
 		this.chegada = chegada;
 		this.saida = saida;
+		return null;
 	}
 	
 	@Override
